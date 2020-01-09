@@ -143,6 +143,7 @@ build_options = {
         "trimesh.resources",
         "Savitar",
         "PyQt5.QtDBus",
+        "PyQt5.sip",
         "comtypes",
         "Charon",
     ],
