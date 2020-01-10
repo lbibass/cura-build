@@ -92,6 +92,7 @@ def load_pyqt5_qtquick(finder, module):
         "Qt5Quick.dll",
         "Qt5QuickTemplates2.dll",
         "Qt5QuickControls2.dll",
+        "Qt5QmlModels.dll",
     ]
     for file_name in required_qt_dlls:
         finder.IncludeFiles(os.path.join(qt_path, file_name), file_name)
