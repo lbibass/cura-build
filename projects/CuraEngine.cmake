@@ -17,7 +17,21 @@ elseif (BUILD_OS_OSX)
     endif()
 endif()
 
-ExternalProject_Add(CuraEngine
+if (USE_CURAENGINE_ARTIFACT)
+  if (BUILD_OS_WINDOWS)
+    ExternalProject_Add(CuraEngine
+      URL https://dl.cloudsmith.io/public/ultimaker/cura-public/raw/files/cura-curaengine-mingw-w64_4.5.0-1.zip
+      BUILD_IN_SOURCE 1
+      CONFIGURE_COMMAND ""
+      BUILD_COMMAND ""
+      INSTALL_COMMAND ${CMAKE_COMMAND} -E copy ${3rdParty_SUBDIR}/* ${CMAKE_INSTALL_PREFIX}
+    )
+  else()
+    message(FATAL_ERROR "Using CuraEngine artifact is only supported on Windows.")
+  endif()
+else()
+  # Build CuraEngine
+  ExternalProject_Add(CuraEngine
     GIT_REPOSITORY https://github.com/ultimaker/CuraEngine
     GIT_TAG origin/${CURAENGINE_BRANCH_OR_TAG}
     GIT_SHALLOW 1
@@ -30,7 +44,8 @@ ExternalProject_Add(CuraEngine
                -DENABLE_MORE_COMPILER_OPTIMIZATION_FLAGS=${CURAENGINE_ENABLE_MORE_COMPILER_OPTIMIZATION_FLAGS}
                -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON
                ${extra_cmake_args}
-)
+  )
+endif()
 
 SetProjectDependencies(TARGET CuraEngine)
 

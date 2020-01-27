@@ -18,6 +18,8 @@ include(BuildPlatformDetection)
 include(GetFromEnvironmentOrCache)
 include(SetProjectDependencies)
 
+option(USE_CURAENGINE_ARTIFACT "Use CuraEngine artifact instead of compiling it." OFF)
+
 option(BUILD_PACKAGE "Create a package with the build of Cura" ON)
 option(SIGN_PACKAGE "Perform signing of the created package. Implies BUILD_PACKAGE" ON)
 
